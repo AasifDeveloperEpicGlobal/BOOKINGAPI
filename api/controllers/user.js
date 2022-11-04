@@ -1,58 +1,47 @@
-import Hotel from "../models/Hotel.js";
+import User from '../models/User.js';
 
-{/*CREATE HOTEL*/ }
-export const createHotel = async (req, res, next) => {
-    const newHotel = new Hotel(req.body);
+{/*UPDATE USER*/ }
+export const updateUser = async (req, res, next) => {
     try {
-        const saveHotel = await newHotel.save()
-        res.status(200).json(saveHotel)
-    } catch (error) {
-        next(error);
-    }
-}
-
-{/*UPDATE HOTEL*/ }
-export const updateHotel = async (req, res, next) => {
-    try {
-        const updatedHotel = await Hotel.findByIdAndUpdate(
+        const updatedUser = await User.findByIdAndUpdate(
             req.params.id, { $set: req.body }, { new: true }
         );
-        res.status(200).json(updatedHotel)
+        res.status(200).json(updatedUser)
     } catch (error) {
         next(error);
     }
 }
 
-{/*DELETE HOTEL*/ }
-export const deleteHotel = async (req, res, next) => {
+{/*DELETE USER*/ }
+export const deleteUser = async (req, res, next) => {
     try {
-        await Hotel.findByIdAndDelete(req.params.id);
-        res.status(200).json("Hotel has been deleted")
+        await User.findByIdAndDelete(req.params.id);
+        res.status(200).json("User has been deleted")
     } catch (error) {
         next(error);
     }
 }
 
-{/*GET HOTEL*/ }
-export const getHotel = async (req, res, next) => {
+{/*GET USER*/ }
+export const getUser = async (req, res, next) => {
     try {
-        const hotel = await Hotel.findById(req.params.id);
-        res.status(200).json(hotel)
+        const user = await User.findById(req.params.id);
+        res.status(200).json(user)
     } catch (error) {
         next(error);
     }
 }
 
-{/*GET ALL HOTEL*/ }
-export const getHotels = async (req, res, next) => {
+{/*GET ALL USER*/ }
+export const getUsers = async (req, res, next) => {
     // const failed = true;
     // if (failed) {
     //     return next(createError(401, "You are not authenticated"));
     // }
 
     try {
-        const hotels = await Hotel.find();
-        res.status(200).json(hotels)
+        const users = await User.find();
+        res.status(200).json(users)
     } catch (error) {
         next(error);
     }
